@@ -154,6 +154,5 @@
 
 	<modules>
 		<module>myspringmvc-common</module>
-		<module>myspringmvc-deploy</module>
 	</modules>
 </project>
