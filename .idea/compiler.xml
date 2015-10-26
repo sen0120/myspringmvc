@@ -22,8 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="myspringmvc-biz" />
         <module name="myspringmvc-common" />
+        <module name="myspringmvc-dal" />
         <module name="myspringmvc-deploy" />
+        <module name="myspringmvc-web" />
       </profile>
     </annotationProcessing>
   </component>
