@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/myspringmvc-common/myspringmvc-common.iml" filepath="$PROJECT_DIR$/myspringmvc-common/myspringmvc-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/myspringmvc-dal/myspringmvc-dal.iml" filepath="$PROJECT_DIR$/myspringmvc-dal/myspringmvc-dal.iml" />
       <module fileurl="file://$PROJECT_DIR$/myspringmvc-deploy/myspringmvc-deploy.iml" filepath="$PROJECT_DIR$/myspringmvc-deploy/myspringmvc-deploy.iml" />
-      <module fileurl="file://$PROJECT_DIR$/myspringmvc-deploy/myspringmvc-deploy.iml" filepath="$PROJECT_DIR$/myspringmvc-deploy/myspringmvc-deploy.iml" />
       <module fileurl="file://$PROJECT_DIR$/myspringmvc-parent.iml" filepath="$PROJECT_DIR$/myspringmvc-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/myspringmvc-web/myspringmvc-web.iml" filepath="$PROJECT_DIR$/myspringmvc-web/myspringmvc-web.iml" />
     </modules>
