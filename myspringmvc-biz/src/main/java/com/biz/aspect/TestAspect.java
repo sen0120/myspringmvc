@@ -18,9 +18,9 @@ public class TestAspect {
     private void IDUMechod() {
     }
 
-    @Before("within(@com..TestAnnotation *)")
+    @Before("IDUMechod()")
     public void args(JoinPoint joinPoint) {
-        System.out.println("within");
+        System.out.println("Before");
     }
 
     /*@Before("target(com.biz.controller.TestController)")

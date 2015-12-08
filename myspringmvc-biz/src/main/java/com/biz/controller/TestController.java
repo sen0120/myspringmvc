@@ -12,11 +12,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @Component
 @TestAnnotation(value = "qwe")
-public class TestController extends TestParents implements TestInterface{
-    @TestAnnotation(value = "Roger1")
-    //@TestAnnotation2(value = "Roger2")
+public class TestController extends TestParents implements TestInterface {
+
     public Integer toInteger(String str) {
-        System.out.println("controller 1");
+        System.out.println("toInteger");
         return Integer.parseInt(str);
     }
+
+    /*public Integer toIntegerWrap(String str) {
+        return toInteger(str);
+    }*/
 }
