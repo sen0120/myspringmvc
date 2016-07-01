@@ -20,12 +20,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.toowell.crm</groupId>
-            <artifactId>crm-facade</artifactId>
-        </dependency>
-
-
-        <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
         </dependency>
