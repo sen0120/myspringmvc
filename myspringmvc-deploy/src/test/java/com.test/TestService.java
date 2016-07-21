@@ -10,18 +10,15 @@ import javax.annotation.Resource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = {"classpath*:springbeans-mvc.xml", "classpath*:myspringmvc-servlet.xml"}) //
-// myspringmvc-servlet dubbo-consumer
-
+//@ContextConfiguration(value = { "classpath*:springbeans-mvc.xml" }) //
 public class TestService {
+
+    @Autowired
+    TestMain testMain;
 
     @Test
     public void test1() {
-
-
-
-
-
-
+        System.out.println(testMain);
     }
 
 }
