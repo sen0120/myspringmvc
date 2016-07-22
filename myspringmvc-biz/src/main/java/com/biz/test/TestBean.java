@@ -2,7 +2,7 @@ package com.biz.test;
 
 public class TestBean {
 
-    public void sout() {
-        System.err.println("TestBean");
+    public static TestBean getTestBean() {
+        return new TestBean();
     }
 }
