@@ -1,6 +1,7 @@
 package com.test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -16,5 +17,7 @@ public class TestMain {
 
         DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
         //        defaultListableBeanFactory.isSingleton();
+        System.out.println(ArrayList.class.isAssignableFrom(Object.class));  //false
+        System.out.println(Object.class.isAssignableFrom(ArrayList.class));  //true
     }
 }
