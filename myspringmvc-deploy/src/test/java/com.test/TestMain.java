@@ -2,6 +2,7 @@ package com.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
