@@ -13,6 +13,9 @@
 
     <aop:aspectj-autoproxy proxy-target-class="true"/> <!---->
 
+    <bean id="testBean" class="com.biz.test.TestBean"/>
+    <bean class="com.biz.test2.InitializeClass"/>
+
     <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
