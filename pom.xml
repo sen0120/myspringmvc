@@ -300,9 +300,9 @@
 
     <modules>
         <module>myspringmvc-common</module>
-        <module>myspringmvc-web</module>
+        <module>myspringmvc-dal</module>
         <module>myspringmvc-biz</module>
         <module>myspringmvc-deploy</module>
-        <module>myspringmvc-dal</module>
+        <module>myspringmvc-web</module>
     </modules>
 </project>
