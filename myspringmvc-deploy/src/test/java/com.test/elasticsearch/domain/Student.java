@@ -1,4 +1,4 @@
-package com.biz.test3;
+package com.test.elasticsearch.domain;
 
 /**
  * Created by fanyun on 16/8/2.

@@ -1,6 +1,5 @@
 package com.test;
 
-import com.biz.test3.TestElastic;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +10,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.biz.test.TestBean;
-
-import java.io.IOException;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration()
