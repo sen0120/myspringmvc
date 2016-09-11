@@ -137,6 +137,7 @@
             <artifactId>spring-test</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
