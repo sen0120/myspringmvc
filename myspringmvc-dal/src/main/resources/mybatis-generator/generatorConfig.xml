@@ -51,6 +51,8 @@
                 enableSelectByExample="false"
                 enableUpdateByExample="false"
 
+
+
         />
         <!--domainObjectName="activityTemplate" 对那些表名特别长,不希望用全名的,用此字段设置 自定义名称-->
         <!--中文说明文档 http://generator.sturgeon.mopaas.com/configreference/properties.html -->
