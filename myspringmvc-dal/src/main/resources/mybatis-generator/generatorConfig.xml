@@ -3,7 +3,7 @@
         "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-
+    <!--中文说明文档 http://generator.sturgeon.mopaas.com/configreference/properties.html -->
     <!-- !!!! Driver Class Path !!!! -->
     <classPathEntry location="/Users/fanyun/.m2/repository/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar"/>
 
@@ -38,7 +38,21 @@
         </javaClientGenerator>
 
         <!-- !!!! Table Configurations !!!! -->
-        <table tableName="activity_template" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+        <table
+                tableName="activity_template"
+                enableInsert="true"
+
+                enableDeleteByPrimaryKey="true"
+                enableSelectByPrimaryKey="true"
+                enableUpdateByPrimaryKey="true"
+
+                enableCountByExample="false"
+                enableDeleteByExample="false"
+                enableSelectByExample="false"
+                enableUpdateByExample="false"
+
+        />
+        <!--domainObjectName="activityTemplate" 对那些表名特别长,不希望用全名的,用此字段设置 自定义名称-->
+        <!--中文说明文档 http://generator.sturgeon.mopaas.com/configreference/properties.html -->
     </context>
 </generatorConfiguration>
