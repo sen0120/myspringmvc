@@ -15,14 +15,14 @@
         </commentGenerator>
 
         <!-- !!!! Database Configurations !!!! -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/mysql" userId="root" password="123456"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.122/bbs" userId="tbj" password="tbj900900"/>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
         <!-- !!!! Model Configurations !!!! -->
-        <javaModelGenerator targetPackage="com.tongbanjie.activity.po" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.tongbanjie.bbs.dataObject" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -33,27 +33,15 @@
         </sqlMapGenerator>
 
         <!-- !!!! Mapper Interface Configurations !!!! -->
-        <javaClientGenerator targetPackage="com.tongbanjie.activity.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.tongbanjie.bbs.dao" targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
         <!-- !!!! Table Configurations !!!! -->
-        <table
-                tableName="activity_template"
-                enableInsert="true"
+        <table tableName="bbs_user_base" enableInsert="true" enableDeleteByPrimaryKey="true" enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true" enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false" />
 
-                enableDeleteByPrimaryKey="true"
-                enableSelectByPrimaryKey="true"
-                enableUpdateByPrimaryKey="true"
-
-                enableCountByExample="false"
-                enableDeleteByExample="false"
-                enableSelectByExample="false"
-                enableUpdateByExample="false"
-
-
-
-        />
         <!--domainObjectName="activityTemplate" 对那些表名特别长,不希望用全名的,用此字段设置 自定义名称-->
         <!--中文说明文档 http://generator.sturgeon.mopaas.com/configreference/properties.html -->
     </context>
