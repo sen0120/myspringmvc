@@ -7,7 +7,7 @@
 
     <import resource="classpath*:datasource.xml"/>
 
-    <import resource="classpath*:dubbo-consumer.xml"/>
+    <!--<import resource="classpath*:dubbo-consumer.xml"/>-->
 
 
 </beans>

@@ -6,7 +6,7 @@
 
     <display-name>myspringmvc-web</display-name>
 
-    <!-- 设置Spring容器加载配置文件路径 (主要配置都在这里面) -->
+    <!-- 设置容器加载配置文件路径 (主要配置都在这里面,如spring) -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:myspringmvc-servlet.xml</param-value>

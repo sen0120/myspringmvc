@@ -1,5 +1,6 @@
 package com.test;
 
+import com.hus.mapper.StudentMapper;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +17,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.util.Assert;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.biz.test.TestBean;
@@ -36,6 +38,9 @@ public class TestService {
     TestBean testBean;
 
     @Autowired
+    private StudentMapper studentMapper;
+
+    @Autowired
     private WebApplicationContext wac;
 
     @BeforeClass
@@ -45,6 +50,9 @@ public class TestService {
 
     @Test
     public void test1() throws Exception {
+        StudentMapper bean = wac.getBean(StudentMapper.class);
+        Assert.isTrue(bean != null);
+/*
         BeanFactory xmlBeanFactory = new XmlBeanFactory(new FileSystemResource("~/bean.xml"));
 
         BeanFactory xmlBeanFactory1 = new XmlBeanFactory(new ClassPathResource("bean.xml"));
@@ -58,6 +66,7 @@ public class TestService {
         DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(defaultListableBeanFactory);
         xmlBeanDefinitionReader.loadBeanDefinitions(new FileSystemResource("~/bean.xml"));
+*/
 
 //        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader("sdf.xml");
     }
