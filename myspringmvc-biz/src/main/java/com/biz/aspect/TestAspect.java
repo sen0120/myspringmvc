@@ -1,9 +1,6 @@
 package com.biz.aspect;
 
-import com.biz.annotation.TestAnnotation;
-import com.biz.annotation.TestAnnotation2;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class TestAspect {
 
-    @Pointcut("execution(* com.biz.controller.TestController.toInteger(..))")
+    @Pointcut("execution(* com.biz.service.TestService.toInteger(..))")
     private void IDUMechod() {
     }
 
@@ -23,12 +20,12 @@ public class TestAspect {
         System.out.println("Before");
     }
 
-    /*@Before("target(com.biz.controller.TestController)")
+    /*@Before("target(com.biz.service.TestController)")
     public void target(JoinPoint joinPoint) {
         System.out.println("target");
     }*/
 
-    /*@Before("this(com.biz.controller.TestParents)")
+    /*@Before("this(com.biz.service.TestParents)")
     public void this1(JoinPoint joinPoint) {
         System.out.println("this");
     }*/
@@ -54,7 +51,7 @@ public class TestAspect {
         System.out.println(testAnnotation2.value());
     }*/
 
-    /* @Before(value = "execution(* com.biz.controller.TestController.toInteger() && args(para))", argNames = "para")
+    /* @Before(value = "execution(* com.biz.service.TestController.toInteger() && args(para))", argNames = "para")
     public void before(String para) {
     //System.out.println("Before");
     System.out.println("para:" + para);
