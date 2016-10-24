@@ -29,7 +29,7 @@ public class TestValidateController {
      * @param result validate验证结果类
      * @return
      */
-    @RequestMapping("/posts/webPost")
+    @RequestMapping("/test/testValidated")
     @ResponseBody
     public Map webPost(@Validated({ValidSupportInterface.ParameterClass1.class}) ValidationBeanVO vo,
                        BindingResult result,
