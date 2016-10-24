@@ -13,12 +13,13 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  */
 public class TestMain {
     public static void main(String[] args) throws IOException {
-        ApplicationContext applicationContext = new XmlWebApplicationContext();
+        /*ApplicationContext applicationContext = new XmlWebApplicationContext();
         //        applicationContext.isSingleton()
 
         DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
         //        defaultListableBeanFactory.isSingleton();
         System.out.println(ArrayList.class.isAssignableFrom(Object.class));  //false
-        System.out.println(Object.class.isAssignableFrom(ArrayList.class));  //true
+        System.out.println(Object.class.isAssignableFrom(ArrayList.class));  //true*/
+
     }
 }

@@ -290,6 +290,12 @@
                 <version>2.2.1</version>
             </dependency>
 
+            <!-- validate,注解controller参数验证 -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>4.3.1.Final</version>
+            </dependency>
 
         </dependencies>
 
@@ -304,5 +310,6 @@
         <module>myspringmvc-biz</module>
         <module>myspringmvc-deploy</module>
         <module>myspringmvc-web</module>
+        <module>myspringmvc-test</module>
     </modules>
 </project>

@@ -32,11 +32,17 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!-- 自动扫描映射器   	-->
+    <!-- 自动扫描映射器,批量注入mapper  	-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.hus.mapper"/>
+        <!-- 如果只有一个数据源,这行可以省略 -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
+    <!--单个注入mapper,好处是对低版本友好-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.tongbanjie.ares.dao.mapper.StudentMapper" />
+		<property name="sqlSessionFactory" ref="userSqlSessionFactory" />
+	</bean>-->
 
 
 </beans>
