@@ -1,7 +1,7 @@
 package com.hus.controller;
 
-import com.biz.valid.ValidSupportInterface;
-import com.biz.vo.ValidationBeanVO;
+import com.hus.biz.valid.ValidSupportInterface;
+import com.hus.biz.vo.ValidationBeanVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

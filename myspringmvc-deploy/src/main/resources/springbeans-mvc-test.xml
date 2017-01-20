@@ -7,10 +7,10 @@
     <context:component-scan base-package="com"/>
     <import resource="classpath*:datasource.xml"/>
     <!--<bean id="testBean" class="com.biz.test.TestBean"></bean>-->
-    <bean id="testBean" class="com.biz.test.TestBean"></bean>
-    <bean id="testBean2" class="com.biz.test.TestBean" factory-method="getTestBean"></bean>
+    <bean id="testBean" class="com.hus.biz.test.TestBean"></bean>
+    <bean id="testBean2" class="com.hus.biz.test.TestBean" factory-method="getTestBean"></bean>
 
-    <bean id="testBeanCreateBean" class="com.biz.test.TestBeanCreateBean"></bean>
+    <bean id="testBeanCreateBean" class="com.hus.biz.test.TestBeanCreateBean"></bean>
 
     <bean id="testBean3" factory-bean="testBeanCreateBean" factory-method="getTestBeanFromTestBeanCreateBean"></bean>
 

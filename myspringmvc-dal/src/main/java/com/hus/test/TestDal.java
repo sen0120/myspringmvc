@@ -5,6 +5,7 @@ import com.mongodb.util.JSON;
 import org.bson.types.ObjectId;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,12 +13,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:myspringmvc-servlet.xml"})
 
 public class TestDal {
-    /*@Test
+    @Ignore
+    @Test
     public void test2() {
         Mongo mongo = new Mongo();
 
@@ -55,12 +58,13 @@ public class TestDal {
             System.out.println(JSON.serialize(cur));
         }
 
-    }*/
+    }
 
     private Mongo mg = null;
     private DB db;
     private DBCollection users;
 
+    @Ignore
     @Before
     public void init() {
         try {
@@ -104,7 +108,7 @@ public class TestDal {
         }
     }
 
-
+    @Ignore
     @Test
     public void add() {
         //先查询所有数据
@@ -138,13 +142,14 @@ public class TestDal {
         queryAll();
     }
 
-
+    @Ignore
     @Test
     public void remove() {
         WriteResult remove = users.remove(new BasicDBObject("_id", new ObjectId("5666778c269a822c98ccfd29")));
         System.out.println(remove);
     }
 
+    @Ignore
     @Test
     public void modify() {
         /*print("修改：" + users.update(new BasicDBObject("_id", new ObjectId("5666779c269a820a882bc4de")), new BasicDBObject("age", 99)));
