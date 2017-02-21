@@ -18,7 +18,7 @@
         <property name="clusterName" value="elasticsearch-cluster-centos"/>
         <property name="dataBase" value="sns"/>
         <property name="table" value="sns_posts"/>
-        <property name="dataObject" value="com.hus.biz.elasticsearch.SnsPosts"/>
+        <property name="dataObject" value="com.hus.biz.vo.SnsPosts"/>
     </bean>
 
 

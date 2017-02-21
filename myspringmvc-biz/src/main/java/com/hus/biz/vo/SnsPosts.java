@@ -1,4 +1,4 @@
-package com.hus.biz.elasticsearch;
+package com.hus.biz.vo;
 
 import java.io.Serializable;
 import java.util.Date;
