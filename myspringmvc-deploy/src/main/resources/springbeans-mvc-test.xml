@@ -14,7 +14,7 @@
 
     <bean id="testBean3" factory-bean="testBeanCreateBean" factory-method="getTestBeanFromTestBeanCreateBean"></bean>
 
-    <bean id="easySearch" class="com.hus.biz.elasticsearch.EasySearch">
+    <bean id="easySearch" class="com.hus.biz.elasticsearch.EasySearch"  init-method="init()">
         <property name="clusterName" value="elasticsearch-cluster-centos"/>
         <property name="dataBase" value="sns"/>
         <property name="table" value="sns_posts"/>
