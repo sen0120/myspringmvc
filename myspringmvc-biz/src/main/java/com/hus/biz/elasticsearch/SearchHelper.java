@@ -1,5 +1,6 @@
 package com.hus.biz.elasticsearch;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
@@ -85,8 +86,10 @@ public abstract class SearchHelper<DataObject> {
     public boolean insertOrUpdate(List<DataObject> idAndColumnValueList, boolean nullSet) {
         initIndexAndType();
         BulkRequestBuilder bulkRequest = client.prepareBulk();
+        if (CollectionUtils.isNotEmpty(idAndColumnValueList)) {
+            checkClassType(idAndColumnValueList.get(0));
+        }
         for (DataObject data : idAndColumnValueList) {
-            checkClassType(data);
             IndexRequestBuilder indexBuilder = client.prepareIndex(dataBase, table);
             indexBuilder.setId(getIdFromBean(data)).setSource(beanToMap(data, nullSet));
             bulkRequest.add(indexBuilder);
