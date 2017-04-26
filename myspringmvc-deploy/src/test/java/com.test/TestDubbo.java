@@ -13,12 +13,12 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringRunner.class)
 @WebAppConfiguration()
 //@ContextConfiguration(value = {"classpath*:springbeans-mvc.xml", "classpath*:myspringmvc-servlet.xml"})
-@ContextConfiguration(value = {"classpath*:myspringmvc-servlet.xml"})
+@ContextConfiguration(value = {"classpath*:dubbo-test.xml"})
 //@ContextConfiguration(value = {"classpath*:springbeans-mvc.xml"})
 //@ContextConfiguration(value = { "classpath*:springbeans-mvc-test.xml" })
 //@ContextConfiguration(value = {"classpath*:springbeans-mvc-test.xml"})
 //@ContextConfiguration(classes = { TestConfiguration.class})
-public class TestService {
+public class TestDubbo {
 
     @Autowired
     private WebApplicationContext wac;

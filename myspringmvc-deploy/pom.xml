@@ -144,6 +144,12 @@
             <version>4.12</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.tongbanjie.resconf</groupId>
+            <artifactId>resconf-facade</artifactId>
+            <version>2.0</version>
+        </dependency>
+
     </dependencies>
 
 </project>
