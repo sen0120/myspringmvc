@@ -1,7 +1,6 @@
 package com.test;
 
-import com.tongbanjie.commons.lang.Result;
-import com.tongbanjie.resconf.facade.ResCatalogManagerFacade;
+import com.tongbanjie.resconf.facade.ResSensitiveFacade;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration()
@@ -24,12 +25,14 @@ public class TestDubbo {
     private WebApplicationContext wac;
 
     @Autowired
-    private ResCatalogManagerFacade resCatalogManagerFacade;
+    private ResSensitiveFacade resSensitiveFacade;
 
     @Test
     public void test1() throws Exception {
-        Result<Void> sdf = resCatalogManagerFacade.deleteCatalog(1L, "sdf");
-        System.out.println(sdf);
+        String word = resSensitiveFacade.replaceSensitiveWord("fuck man afuckw", "*");
+        Set<String> sensitiveWord = resSensitiveFacade.getSensitiveWord("afuck迷昏药w");
+        boolean bool = resSensitiveFacade.isContaintSensitiveWord("afuck迷昏药w");
+        System.out.println(11);
     }
 
 }
