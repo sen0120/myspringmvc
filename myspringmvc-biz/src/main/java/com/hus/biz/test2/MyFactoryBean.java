@@ -4,7 +4,7 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Test2FactoryBean implements FactoryBean{
+public class MyFactoryBean implements FactoryBean{
     public Object getObject() throws Exception {
         return null;
     }
