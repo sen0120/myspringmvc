@@ -1,21 +1,39 @@
 package com.test;
 
-import com.google.gson.JsonArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.math.RandomUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by fanyun on 16/7/12.
  */
 public class TestMain {
-    public static void main(String[] args) throws IOException {
-        JsonArray hintArray = new JsonArray();
-        hintArray.add("111");
-        hintArray.add("\"2222\"");
-        System.out.println(hintArray.toString().replace("\\\"", "'"));
+    private static Logger logger = LoggerFactory.getLogger(TestMain.class);
 
-        System.out.println("".endsWith("\n"));
+    public static void main(String[] args) {
+        long l = System.currentTimeMillis();
+        System.out.println(new Date(Long.parseLong(String.valueOf(l))));
+    }
+
+    public static String mapToSortString(Map map) {
+        List<Map.Entry<String, Object>> list = new ArrayList<Map.Entry<String, Object>>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Object>>() {
+            //升序排序
+            public int compare(Map.Entry<String, Object> o1,
+                               Map.Entry<String, Object> o2) {
+                return o1.getKey().compareTo(o2.getKey());
+            }
+
+        });
+        return JSONObject.toJSONString(list);
     }
 
     public static String getSeqId() {

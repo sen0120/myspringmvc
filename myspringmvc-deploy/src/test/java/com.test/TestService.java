@@ -1,7 +1,9 @@
 package com.test;
 
-import com.tongbanjie.commons.lang.Result;
-import com.tongbanjie.resconf.facade.ResCatalogManagerFacade;
+import com.tongbanjie.score.consts.ScoreConsts;
+import com.tongbanjie.score.enums.ScoreRelatEnum;
+import com.tongbanjie.score.facade.ScoreManageFacade;
+import com.tongbanjie.score.model.request.SendScoreRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,10 @@ public class TestService {
     @Autowired
     private WebApplicationContext wac;
 
-    @Autowired
-    private ResCatalogManagerFacade resCatalogManagerFacade;
+
 
     @Test
     public void test1() throws Exception {
-        Result<Void> sdf = resCatalogManagerFacade.deleteCatalog(1L, "sdf");
-        System.out.println(sdf);
     }
 
 }

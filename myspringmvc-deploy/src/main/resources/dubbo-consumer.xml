@@ -26,8 +26,6 @@
     <!--<dubbo:reference id="storeFacade"   interface="com.hus.facade.store.service.StoreFacade"     version="1.0.3" timeout="5000" check="false" url="dubbo://172.16.2.82:22881"/>
 
     <dubbo:reference id="productFacade" interface="com.hus.facade.product.service.ProductFacade" version="1.0.3" timeout="5000" check="false" url="dubbo://172.16.2.82:22881"/>-->
-    <dubbo:reference id="resCatalogManagerFacade" interface="com.tongbanjie.resconf.facade.ResCatalogManagerFacade" version="2.0"
-                     timeout="5000" check="false" />
 
 
 </beans>
