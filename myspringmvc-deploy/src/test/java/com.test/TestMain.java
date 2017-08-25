@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +18,12 @@ public class TestMain {
     private static Logger logger = LoggerFactory.getLogger(TestMain.class);
 
     public static void main(String[] args) {
-        long l = System.currentTimeMillis();
-        System.out.println(new Date(Long.parseLong(String.valueOf(l))));
+        StaticClass.InnerStaticClass innerStaticClass = new StaticClass.InnerStaticClass();
+        innerStaticClass.a = 3;
+
+        StaticClass.InnerStaticClass innerStaticClass2 = new StaticClass.InnerStaticClass();
+        System.out.println(innerStaticClass2.a);
+
     }
 
     public static String mapToSortString(Map map) {
