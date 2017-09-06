@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ClassUnderTest.class)
 public class TestConstruction {
-    //模拟构造函数
+    //模拟构造函数 456
     @Test
     public void createDirectoryStructureWhenPathDoesntExist() throws Exception {
         final String directoryPath = "seemygod";
