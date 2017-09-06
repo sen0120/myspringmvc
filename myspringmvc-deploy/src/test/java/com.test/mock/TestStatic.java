@@ -18,6 +18,6 @@ public class TestStatic {
         // 在这个测试用例中,当generateNewId()每次被调用时,都会返回15
         PowerMockito.when(IdGenerator.generateNewId()).thenReturn(13L);
         Assert.assertEquals(15L, new ClassUnderTest().methodToTest());
-
+        //branch 2
     }
 }
