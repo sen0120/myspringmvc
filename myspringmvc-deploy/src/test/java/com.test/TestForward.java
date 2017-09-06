@@ -2,6 +2,7 @@ package com.test;
 
 public class TestForward {
     public static void main(String[] args) {
+
         //master
 
         System.out.println("master1");
