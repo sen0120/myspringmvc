@@ -1,4 +1,4 @@
-package com.test.proxy.jdk;
+package com.test.jdk;
 
 /**
  * Created by fanyun on 16/7/25.
