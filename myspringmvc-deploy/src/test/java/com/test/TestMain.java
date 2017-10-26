@@ -18,11 +18,7 @@ public class TestMain {
     private static Logger logger = LoggerFactory.getLogger(TestMain.class);
 
     public static void main(String[] args) {
-        StaticClass.InnerStaticClass innerStaticClass = new StaticClass.InnerStaticClass();
-        innerStaticClass.a = 3;
 
-        StaticClass.InnerStaticClass innerStaticClass2 = new StaticClass.InnerStaticClass();
-        System.out.println(innerStaticClass2.a);
 
     }
 
