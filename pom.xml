@@ -312,6 +312,13 @@
             <version>1.2.29</version>
         </dependency>
 
+        <!-- canal -->
+        <dependency>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.client</artifactId>
+            <version>1.0.12</version>
+        </dependency>
+
         <!-- test -->
         <dependency>
             <groupId>javax.servlet</groupId>
