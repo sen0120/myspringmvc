@@ -31,6 +31,12 @@ public class HonourProdProduct implements Serializable {
     private String name;
 
     /**
+     * 产品展现优先级，数字越高越靠前
+     */
+    @JSONField(ordinal = 1)
+    private String priority;
+
+    /**
      * 数据库字段长度:10
      * 字段备注:产品年化收益率
      * Wed Dec 13 20:04:04 CST 2017 AutoGenerate
@@ -364,7 +370,7 @@ public class HonourProdProduct implements Serializable {
         return soldOutTime;
     }
 
-    public HonourProdProduct setPeriodDaysInt(int periodDaysInt) {
+    public HonourProdProduct setPeriodDaysInt(Integer periodDaysInt) {
         this.periodDaysInt = periodDaysInt;
         return this;
     }
@@ -400,5 +406,13 @@ public class HonourProdProduct implements Serializable {
         return modifyTime;
     }
 
+    public String getPriority() {
+        return priority;
+    }
+
+    public HonourProdProduct setPriority(String priority) {
+        this.priority = priority;
+        return this;
+    }
 }
 

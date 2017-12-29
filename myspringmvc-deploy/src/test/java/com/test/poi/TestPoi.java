@@ -24,7 +24,7 @@ public class TestPoi {
 
     public static void main(String[] args) throws Exception {
         TestPoi testPoi = new TestPoi();
-        File file = new File("/Users/fanyun/mygit/myspringmvc/myspringmvc-deploy/src/test/resources/尊享理财_20171225_v1 .xlsx");
+        File file = new File("/Users/fanyun/mygit/myspringmvc/myspringmvc-deploy/src/test/resources/尊享理财产品录入_20171229_v1.xlsx");
         List<Object> listByExcel = testPoi.getListByExcel(new FileInputStream(file), "尊享理财_20171225_v1 .xlsx");
         System.out.println(listByExcel);
     }
@@ -85,37 +85,40 @@ public class TestPoi {
     public void indexToValue(HonourProdProduct vo, Cell cell, int index) {
         switch (index) {
             case 0:
-                vo.setId(cell.getStringCellValue().replace("尊享理财", ""));
+                vo.setId(cell.getStringCellValue().replace("尊享系列", ""));
                 vo.setName(cell.getStringCellValue());
                 break;
             case 1:
-                vo.setProfit(new BigDecimal(String.valueOf(cell.getNumericCellValue())));
+                vo.setPriority("" + Double.valueOf(cell.getNumericCellValue()).intValue());
                 break;
             case 2:
-                vo.setPeriod(StringUtils.leftPad("D" +
+                vo.setProfit(new BigDecimal(String.valueOf(cell.getNumericCellValue())));
+                break;
+            case 3:
+                vo.setPeriod("D" + StringUtils.leftPad(
                         new BigDecimal(cell.getNumericCellValue()).setScale(0, RoundingMode.DOWN).toString(), 3, "0"));
                 vo.setPeriodDaysInt(Double.valueOf(cell.getNumericCellValue()).intValue());
                 break;
-            case 3:
+            case 4:
                 vo.setStartBenefit(cell.getDateCellValue());
                 break;
-            case 4:
+            case 5:
                 vo.setEndBenefit(cell.getDateCellValue());
                 break;
-            case 5:
+            case 6:
                 vo.setRaiseAmount(new BigDecimal(cell.getNumericCellValue()));
                 vo.setRemainAmount(new BigDecimal(cell.getNumericCellValue()));
                 break;
-            case 6:
+            case 7:
                 vo.setLeastAmount(new BigDecimal(cell.getNumericCellValue()));
                 break;
-            case 7:
+            case 8:
                 vo.setSteppingAmount(new BigDecimal(cell.getNumericCellValue()));
                 break;
-            case 8:
+            case 9:
                 vo.setRedeemTypeDesc(cell.getStringCellValue());
                 break;
-            case 9:
+            case 10:
                 vo.setNote(cell.getRichStringCellValue().getString());
                 break;
             default:
