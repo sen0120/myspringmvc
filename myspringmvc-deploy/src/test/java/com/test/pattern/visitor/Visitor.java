@@ -1,4 +1,4 @@
-package com.test.visitor;
+package com.test.pattern.visitor;
 
 public interface Visitor {
     void visit(AElement element);

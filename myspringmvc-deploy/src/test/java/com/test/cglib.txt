@@ -1,0 +1,15 @@
+底层字节码技术
+动态代理:系统运行时动态代理生成实现类,而不是编码时创建
+jdk:
+    实现原理:利用反射机制,Proxy Method.Invoke(Object,Object[])
+    核心代码:
+        Proxy.newProxyInstance(ClassLoader,Class[] interfaces,InvocationHandler)
+        InvocationHandler.handler(Object proxy,Method method,Object[] args)
+
+cglib:
+    原理:字节码,创建子类,方法拦截,织入切面,和jdk等动态代理技术一起,是实现aop技术的基础;
+    核心方法:
+        Enhancer.setSuperClass(被代理类)
+        Enhancer.setCallback(MethodIntercept实现类)
+            MethodIntercept.intercept(Object obj,Object[] args,Method method,MethodProxy mp)
+        Enhancer.create()

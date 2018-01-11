@@ -1,4 +1,4 @@
-package com.test.visitor;
+package com.test.pattern.visitor;
 
 public class BElement implements Element {
     private String name = "BElement";

@@ -1,6 +1,7 @@
 package com.test;
 
 import com.alibaba.fastjson.JSONObject;
+import com.test.elasticsearch.domain.Student;
 import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +20,19 @@ public class TestMain {
     private static Logger logger = LoggerFactory.getLogger(TestMain.class);
 
     public static void main(String[] args) {
+        Student student = new Student();
+        student.settPlanTrade(true);
+        student.settPlanTradeCreateDate(new Date());
+        student.setMale(true);
+        String sfStr = net.sf.json.JSONObject.fromObject(student).toString();
+        String fastStr = JSONObject.toJSONString(student);
+        System.out.println(sfStr);
+        System.out.println(fastStr);
 
-
+        Object sfStudent = net.sf.json.JSONObject.toBean(net.sf.json.JSONObject.fromObject(sfStr), Student.class);
+        Student fastStudent = JSONObject.parseObject(fastStr, Student.class);
+        System.out.println(sfStudent);
+        System.out.println(fastStudent);
     }
 
     public static String mapToSortString(Map map) {
