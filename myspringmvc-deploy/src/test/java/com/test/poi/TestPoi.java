@@ -1,7 +1,6 @@
 package com.test.poi;
 
 import com.alibaba.fastjson.JSONObject;
-import com.tongbanjie.commons.util.AesUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -25,7 +24,7 @@ public class TestPoi {
 
     public static void main(String[] args) throws Exception {
         TestPoi testPoi = new TestPoi();
-        File file = new File("/Users/fanyun/mygit/myspringmvc/myspringmvc-deploy/src/test/resources/尊享理财产品录入_20180111 update.xlsx");
+        File file = new File("/Users/fanyun/Documents/尊享理财产品录入_20180312_v1.xlsx");
         //"borrower":"","idCardNo":"","borrowUsage":"",
         //"borrower":"","repaymentSource":"","borrowUsage":"",
 //        System.out.println(AesUtil.decrypt("u74wpR/RZrbRXcw7t2792w==", AesUtil.getKeystore()));

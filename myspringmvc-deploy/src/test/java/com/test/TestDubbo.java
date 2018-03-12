@@ -1,12 +1,5 @@
 package com.test;
 
-import com.tongbanjie.commons.lang.Result;
-import com.tongbanjie.score.common.dataobject.ScoreExchangeStream;
-import com.tongbanjie.score.common.vo.ScoreSpendVO;
-import com.tongbanjie.score.consts.ScoreConsts;
-import com.tongbanjie.score.enums.ScoreRelatEnum;
-import com.tongbanjie.score.facade.ScoreManageFacade;
-import com.tongbanjie.score.model.request.SendScoreRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,30 +22,12 @@ public class TestDubbo {
     private WebApplicationContext wac;
 
     @Autowired
-    private ScoreManageFacade scoreManageFacade;
+//    private HonourAssetsFacade honourAssetsFacade;
 
     @Test
     public void test1() throws Exception {
-        SendScoreRequest sendReq = new SendScoreRequest();
-        sendReq.setUserId("100086544");
-        sendReq.setScore(Integer.parseInt("10000000"));
-        sendReq.setSendType(ScoreRelatEnum.CRM_GENERAL_MANUAL.getSendType());
-        sendReq.setRemark("sdf");
-        sendReq.setOperator("admin");
-        sendReq.setOperateType(ScoreConsts.ScoreStreamOperateType.TONGBANJIE_GIFT);
-        Result<Void> voidResult = scoreManageFacade.executeSendScore(sendReq);
-        System.out.println(voidResult);
-
-        /*ScoreSpendVO scoreSpendVo = new ScoreSpendVO();
-        ScoreExchangeStream scoreExchangeStream = new ScoreExchangeStream();
-        scoreExchangeStream.setUserId("100086544");
-        scoreExchangeStream.setProductType(ScoreConsts.ScoreProductType.TO_BALANCE);
-        scoreExchangeStream.setOperator("SYSTEM");
-        scoreExchangeStream.setExchangeStatus(ScoreConsts.ScoreExchangeStatus.EXCHANGE_SUCCESS);
-        scoreSpendVo.setCostType(1);
-        scoreSpendVo.setScoreExchangeStream(scoreExchangeStream);
-        Result<ScoreSpendVO> spendRes = scoreManageFacade.spend(scoreSpendVo);
-        System.out.println(spendRes);*/
+//        Result<Double> doubleResult = honourAssetsFacade.queryAssetsByUserId("120001867");
+        System.out.println(111);
     }
 
 }

@@ -10,7 +10,7 @@
     <dubbo:application name="consumerapp1"/>
 
     <!--<dubbo:registry address="zookeeper://192.168.3.240:2181"/>-->
-    <dubbo:registry address="zookeeper://192.168.1.109:2181"/>
+    <dubbo:registry />
 
     <!--<dubbo:reference id="storeFacade" interface="com.hus.facade.store.service.StoreFacade" version="1.0.0"
                      timeout="5000" check="false" url="dubbo://192.168.3.240:22881"/>-->
@@ -27,5 +27,6 @@
 
     <dubbo:reference id="productFacade" interface="com.hus.facade.product.service.ProductFacade" version="1.0.3" timeout="5000" check="false" url="dubbo://172.16.2.82:22881"/>-->
     <dubbo:reference id="scoreManageFacade" interface="com.tongbanjie.score.facade.ScoreManageFacade" version="2.1" timeout="5000" retries="0"/>
+    <dubbo:reference id="honourAssetsFacade" interface="com.tongbanjie.libra.facade.HonourAssetsFacade" version="2.0" url="dubbo://localhost:18228"/>
 
 </beans>

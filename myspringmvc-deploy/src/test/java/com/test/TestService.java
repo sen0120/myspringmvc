@@ -1,9 +1,5 @@
 package com.test;
 
-import com.tongbanjie.score.consts.ScoreConsts;
-import com.tongbanjie.score.enums.ScoreRelatEnum;
-import com.tongbanjie.score.facade.ScoreManageFacade;
-import com.tongbanjie.score.model.request.SendScoreRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
