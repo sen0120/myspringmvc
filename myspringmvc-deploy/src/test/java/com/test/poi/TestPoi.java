@@ -1,6 +1,7 @@
 package com.test.poi;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hus.crypto.AesUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -31,8 +32,12 @@ public class TestPoi {
 //        System.out.println(decrypt("UdUJ4dm2r2/r4F2bi53sNmks7elnKRYgSyHC+BuMYfY="));
         List<Object> listByExcel = testPoi.getListByExcel(new FileInputStream(file), "*.xlsx");
         System.out.println(listByExcel);
+
+        System.out.println(AesUtil.decrypt("FXIu93u7lvGx9ml2sxtYOkUbLa6XTysP0RBuvF3Em2I=", AesUtil.getKeystore()));
+//        System.out.println(AesUtil.decrypt("4hhLNRQOtWmnxVF1V/nhalEx/Ms3u5ZvBZ0kdwPKG6I=", AesUtil.getKeystore()));
     }
 
+    //CommonUtils.decrypt
     public List<Object> getListByExcel(InputStream in, String fileName) throws Exception {
         // 创建Excel工作薄
         Workbook work = this.getWorkbook(in, fileName);

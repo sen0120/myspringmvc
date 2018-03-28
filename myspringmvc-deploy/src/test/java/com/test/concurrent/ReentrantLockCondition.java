@@ -15,24 +15,28 @@ public class ReentrantLockCondition extends Thread {
 
         lock.lock();
 
-        condition.signal();
-        Thread.sleep(50000L);
+        long signalStart = System.currentTimeMillis();
+
+        System.out.println("main signal use" + (System.currentTimeMillis() - signalStart));
 
         lock.unlock();
+        condition.signal();//不会释放锁,而是在unlock后才通知其他线程 竞争锁
+        System.out.println("main unlock");
     }
 
     @Override
     public void run() {
         lock.lock();//申请锁
         try {
+            System.out.println("thread await");
             condition.await();//释放锁并加入等待队列,当其他线程signal时会重新请求锁,请求到锁后执行完代码后记得释放锁
-
-            System.out.println(1);
+            System.out.println("thread get lock");
         } catch (InterruptedException e) {
 
         } finally {
             System.out.println("finally");
             if (lock.isHeldByCurrentThread()) {
+                System.out.println("unlock");
                 lock.unlock();//释放锁
             }
         }

@@ -20,7 +20,7 @@ public class TestMain {
     private static Logger logger = LoggerFactory.getLogger(TestMain.class);
 
     public static void main(String[] args) {
-        Student student = new Student();
+       /* Student student = new Student();
         student.settPlanTrade(true);
         student.settPlanTradeCreateDate(new Date());
         student.setMale(true);
@@ -32,7 +32,14 @@ public class TestMain {
         Object sfStudent = net.sf.json.JSONObject.toBean(net.sf.json.JSONObject.fromObject(sfStr), Student.class);
         Student fastStudent = JSONObject.parseObject(fastStr, Student.class);
         System.out.println(sfStudent);
-        System.out.println(fastStudent);
+        System.out.println(fastStudent);*/
+
+        //from space 4096K,  20% used [7fac00000, 7facd3ba8, 7fb000000)
+        long a = Long.parseLong("7fac00000", 16);
+        long b = Long.parseLong("7facd3ba8", 16);
+        long c = Long.parseLong("7fb000000", 16);
+        System.out.println((b - a) / 1024);
+        System.out.println((c - a) / 1024);
     }
 
     public static String mapToSortString(Map map) {

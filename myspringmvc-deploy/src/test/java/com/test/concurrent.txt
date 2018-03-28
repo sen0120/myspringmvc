@@ -5,7 +5,10 @@
 
 ReentrantLock 可重入锁 可中断 可限时  可公平锁(先到先得,防止阻塞线程处于饥饿状态)
 .lock 申请锁,一次只能有1个线程获得锁,但是1个线程可以加多重锁并计数.单线程可重复进入,但需要要重复退出.
-.unlock 释放锁,必须加载finally代码段里执行,防止代码异常导致没有释放锁;condition.await也可以释放锁,但是可以必须unlock获得
+.unlock 释放锁,必须加载finally代码段里执行,防止代码异常导致没有释放锁;
+    condition.await也可以释放锁并加入等待队列,当其他线程signal并unlock释放了锁后才会重新请求锁,请求到锁后执行完代码后记得释放锁;
+    condition的方法await和signal必须在lock获得锁才能执行,否则会报错IllegalMonitorStateException;
+    condition.await会释放锁,condition.signal不会释放锁,只会在执行unlock后通知其他线程拿锁.
 
 
 其他线程的join()方法(非静态方法,等于调用的是其他线程对象的方法),那么等待对象其他线程结束后再执行当前线程,类似于从异步编程同步,且当前线程最后执行.这个方法可以让当前线程等级异步线程执行完后再执行,也就使得join后面的代码变得同步且顺序执行.
