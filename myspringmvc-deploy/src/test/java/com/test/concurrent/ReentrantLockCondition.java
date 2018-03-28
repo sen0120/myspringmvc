@@ -17,10 +17,9 @@ public class ReentrantLockCondition extends Thread {
 
         long signalStart = System.currentTimeMillis();
 
-        System.out.println("main signal use" + (System.currentTimeMillis() - signalStart));
+        condition.signal();//不会释放锁,而是在unlock后才通知其他线程 竞争锁
 
         lock.unlock();
-        condition.signal();//不会释放锁,而是在unlock后才通知其他线程 竞争锁
         System.out.println("main unlock");
     }
 
