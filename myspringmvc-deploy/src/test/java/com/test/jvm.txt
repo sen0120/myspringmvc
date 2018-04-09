@@ -12,13 +12,13 @@ java堆，存放实例对象所有线程共享。
 
 程序计数器：；
 
-垃圾收集器：复制算法、引用计数法、标记清除法、标记压缩法；
+垃圾收集器：复制算法、引用计数法(循环引用)、标记清除法(碎片)、标记压缩法；
 
 堆栈方法区关联？
 堆存放数据，如何存放；栈执行程序，如何处理数据；方法区是辅助堆栈的永久区（Perm），类信息、静态信息；堆通过方法区的类信息创建对象；
 
 垃圾回收机制：不同的机制有，最常见的是分为新生代和老年代；新生代分为edon区（创建，一次gc后放到s区）、s0与s1区(from与to区，可以相互转换交替位置，一次只有一个使用)
-老年代规则：GC垃圾回收X次后还没被回收(-XX：MaxTrnuringThreadshold参数配置，默认15次；)，就可以去老年代；eden区创建的对象第一次gc后还存活就会放入s0或s1；tenured。
+老年代规则：GC垃圾回收X次后还没被回收(-XX：MaxTenuringThreshold 参数配置，默认15次；)，就可以去老年代；eden区创建的对象第一次gc后还存活就会放入s0或s1；tenured。
 
 什么时候gc？虚拟机自己控制，写代码手工调用。new时堆不足时肯定gc。
 
@@ -30,7 +30,7 @@ java堆，存放实例对象所有线程共享。
 (新生代比例)-XX:suvivorRatio，即eden/from=eden/to，eden=Xmn大小÷（eden/(eden+from+to)）
 （新生代年老代比例）-XX:NewRatio=年老代/新生代
 -XX:+HeapDumpOnOutOfMemoryError -XX:HeadDumpPath导出堆设置路径
--XX：MaxTrnuringThreadshold，新生代进入年老代需要经历多少次gc，默认15次；
+-XX：MaxTenuringThreshold，新生代进入年老代需要经历多少次gc，默认15次；
 
 栈：-Xss 指定线程的最大栈空间，决定了函数可调用的最大深度；
 方法区：-XX:MaxPermSize
@@ -47,6 +47,16 @@ java堆，存放实例对象所有线程共享。
 新生代回收频率高、耗时短，老年代回收效率低耗时长，尽量减少老年代的gc；
 ！！分区算法：内存分寸N个独立空间，每个小空间gc而不是整个空间gc；
 
-垃圾回收的停顿现象：stop le world；
 
-没有gc介入对象一直在eden区，
+新生代收集器：Serial、ParNew、Parallel Scavenge；
+老年代收集器：Serial Old、Parallel Old、CMS；
+整堆收集器：G1；
+
+是JAVA虚拟机在Server模式下的默认值，使用Server模式后，java虚拟机使用Parallel Scavenge收集器（新生代）+ Serial Old收集器（老年代）的收集器组合进行内存回收。
+
+没有gc介入对象一直在eden区，Minor GC即新生代GC，指发生在新生代的垃圾收集动作；Full GC 又称Major GC或老年代GC，指发生在老年代的GC；
+
+垃圾回收的停顿现象：stop the world；
+
+
+
