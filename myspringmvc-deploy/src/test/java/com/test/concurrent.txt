@@ -36,7 +36,7 @@ synchronized在加锁时进行数据的重加载（主内存 -> 工作内存）�
 wait和notify是Object对象方法,不是线程方法,使用时使用synchronize锁住一个对象,再调用这个对象的wait
 notifyAll()唤醒此对象监视器上等待的所有线程。
 notify()唤醒此对象监视器上的一个线程,具体不确定.
-wait()释放对象锁与让出cpu,进入等待队列,直到此对象调用notify或notifyAll
+wait()释放对象锁并让出cpu,进入等待队列,直到此对象调用notify或notifyAll
 notify和notifyAll不是立即释放锁,而是在synchronize执行完后释放锁
 
 Condition
