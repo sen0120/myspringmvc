@@ -1,6 +1,7 @@
 package com.test.guava.xianliu;
 
 import com.google.common.util.concurrent.RateLimiter;
+import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,32 @@ import java.util.concurrent.TimeUnit;
  * 有很多个任务，但希望每秒不超过X个，可用此类
  */
 public class RateLimiterTest {
+    public static void main(String[] args) throws InterruptedException {
+        RateLimiter rateLimiter = RateLimiter.create(10);
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        while (true) {
+            if (stopWatch.getTime() > 3000)
+                break;
+        }
+        int countLarge = 0;
+        int countSmall = 0;
+        List<Double> list = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            double acquire = rateLimiter.acquire();
+            list.add(acquire);
+            if (acquire > 0.08) {
+                countLarge++;
+            } else {
+                countSmall++;
+            }
 
-    public static void main(String[] args) throws Exception {
+        }
+        System.out.println(countLarge);
+        System.out.println(countSmall);
+    }
+
+    public static void main2(String[] args) throws Exception {
         //0.5代表一秒最多多少个,且最大容量为0.5
         RateLimiter rateLimiter = RateLimiter.create(0.5);
         List<Runnable> tasks = new ArrayList<Runnable>();

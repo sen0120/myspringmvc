@@ -24,16 +24,16 @@ public class TestPoi {
     private final static String excel2007U = ".xlsx"; // 2007+ 版本的excel
 
     public static void main(String[] args) throws Exception {
-        TestPoi testPoi = new TestPoi();
-        File file = new File("/Users/fanyun/Documents/尊享理财产品录入_20180312_v1.xlsx");
+//        TestPoi testPoi = new TestPoi();
+//        File file = new File("/Users/fanyun/Documents/尊享理财产品录入_20180312_v1.xlsx");
         //"borrower":"","idCardNo":"","borrowUsage":"",
         //"borrower":"","repaymentSource":"","borrowUsage":"",
-//        System.out.println(AesUtil.decrypt("u74wpR/RZrbRXcw7t2792w==", AesUtil.getKeystore()));
+        System.out.println(AesUtil.decrypt("WobHzVBcXC8Dpks6XGcyWA==", AesUtil.getKeystore()));
 //        System.out.println(decrypt("UdUJ4dm2r2/r4F2bi53sNmks7elnKRYgSyHC+BuMYfY="));
-        List<Object> listByExcel = testPoi.getListByExcel(new FileInputStream(file), "*.xlsx");
-        System.out.println(listByExcel);
+//        List<Object> listByExcel = testPoi.getListByExcel(new FileInputStream(file), "*.xlsx");
+//        System.out.println(listByExcel);
 
-        System.out.println(AesUtil.decrypt("FXIu93u7lvGx9ml2sxtYOkUbLa6XTysP0RBuvF3Em2I=", AesUtil.getKeystore()));
+//        System.out.println(AesUtil.decrypt("LJQQbHxl3OGrbx/DlILPQQ2o/lFJB9sWDKjXTnvh0q4=", AesUtil.getKeystore()));
 //        System.out.println(AesUtil.decrypt("4hhLNRQOtWmnxVF1V/nhalEx/Ms3u5ZvBZ0kdwPKG6I=", AesUtil.getKeystore()));
     }
 

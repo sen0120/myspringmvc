@@ -42,4 +42,21 @@ notify和notifyAll不是立即释放锁,而是在synchronize执行完后释放�
 Condition
 await()使当前线程加入等待队列中，并释放当锁，当其他线程调用signal()会重新请求锁。与Object.wait()类似。
 
+异常处理
+ThreadPoolExecutor.submit()回返回Future,如果线程中有异常,调用Future.get()会抛出java.util.concurrent.ExecutionException异常,通过e.getCause() instance xxException判断异常类型
+ThreadPoolExecutor.execute() 会直接抛出异常,异常处理可以通过 Thread.setDefaultUncaughtExceptionHandler(Thread.UncaughtExceptionHandler) 方法来自定义处理,值得注意的是 submit()方法 中UncaughtExceptionHandler实现是无效的,异常仍然会包装在Future中
+
+ThreadPoolExecutor.getActiveCount()判断线程池是否执行完;
+ThreadPoolExecutor.getCompletedTaskCount()判断执行完了多少个线程
+ThreadPoolExecutor.getTaskCount()判断线程池接受了多少个线程
+ThreadPoolExecutor.shutdown()线程池不再接受新情趣
+ThreadPoolExecutor.awaitTermination()阻塞代码，直到所有任务执行完毕并且shutdown请求被调用,同一个线程内觉不能放在 shutdown()方法之前,或者再其他线程中执行 shutdown,CallerRunsPolicy策略会
+
+可以使用 awaitTermination 阻塞主线程,但 shutdown 方法一定不能在 awaitTermination 后执行,shutdown 可以在其他线程中执行;
+
+
+
+
+CountDownLatch.await阻塞主线程,等待其他线程执行完毕,再执行
+
 

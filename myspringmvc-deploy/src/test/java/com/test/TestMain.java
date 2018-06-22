@@ -2,6 +2,7 @@ package com.test;
 
 import com.alibaba.fastjson.JSONObject;
 import com.test.elasticsearch.domain.Student;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,14 @@ public class TestMain {
     private static Logger logger = LoggerFactory.getLogger(TestMain.class);
 
     public static void main(String[] args) {
+
+        try {
+            throw new RuntimeException("sdf");
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } finally {
+            System.err.println(111);
+        }
        /* Student student = new Student();
         student.settPlanTrade(true);
         student.settPlanTradeCreateDate(new Date());
