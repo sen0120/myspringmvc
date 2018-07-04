@@ -49,7 +49,7 @@ ThreadPoolExecutor.execute() 会直接抛出异常,异常处理可以通过 Thre
 ThreadPoolExecutor.getActiveCount()判断线程池是否执行完;
 ThreadPoolExecutor.getCompletedTaskCount()判断执行完了多少个线程
 ThreadPoolExecutor.getTaskCount()判断线程池接受了多少个线程
-ThreadPoolExecutor.shutdown()线程池不再接受新情趣
+ThreadPoolExecutor.shutdown()线程池不再接受新线程
 ThreadPoolExecutor.awaitTermination()阻塞代码，直到所有任务执行完毕并且shutdown请求被调用,同一个线程内觉不能放在 shutdown()方法之前,或者再其他线程中执行 shutdown,CallerRunsPolicy策略会
 
 可以使用 awaitTermination 阻塞主线程,但 shutdown 方法一定不能在 awaitTermination 后执行,shutdown 可以在其他线程中执行;

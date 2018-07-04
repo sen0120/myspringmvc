@@ -1,7 +1,5 @@
 package com.test.poi;
 
-import com.alibaba.fastjson.JSONObject;
-import com.google.gson.GsonBuilder;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -28,20 +26,26 @@ public class TestPoi2 {
     private final static String excel2007U = ".xlsx"; // 2007+ 版本的excel
 
     public static void main(String[] args) throws Exception {
+//        sendGetRequest("https://activity.tongbanjie.com//test/worldcup18/trade/succ/ordermq?tzOrderNo=18062913134578700010120350413641");
+        a1();
+    }
+
+    private static void a1() throws Exception {
         TestPoi2 testPoi = new TestPoi2();
-        File file = new File("/Users/fanyun/Documents/611补发.xlsx");
+        File file = new File("/Users/fanyun/linshi/fun_201807021216.xlsx");
         //"borrower":"","idCardNo":"","borrowUsage":"",
         //"borrower":"","repaymentSource":"","borrowUsage":"",
 //        System.out.println(AesUtil.decrypt("u74wpR/RZrbRXcw7t2792w==", AesUtil.getKeystore()));
 //        System.out.println(decrypt("UdUJ4dm2r2/r4F2bi53sNmks7elnKRYgSyHC+BuMYfY="));
 
 
-        List<TzOrder> listByExcel = testPoi.getListByExcel(new FileInputStream(file), "*.xlsx");
+        List<String> listByExcel = testPoi.getListByExcel(new FileInputStream(file), "*.xlsx");
 
-        for (TzOrder tzOrder : listByExcel) {
-            System.out.println(JSONObject.toJSONString(tzOrder));
+        for (String ele : listByExcel) {
+            sendGetRequest("https://mapi.tongbanjie.com/libra/test/sendCopperForInviter?orderNo=" + ele);
+//            System.out.println(ele);
 //            System.out.println(tzOrder.getTzOrderNo());
-            sendGetRequest("https://activity.tongbanjie.com/test/fan18/trade/succ/ordermq?tzOrderNo=" + tzOrder.getTzOrderNo());
+//            sendGetRequest("https://activity.tongbanjie.com/test/fan18/trade/succ/ordermq?tzOrderNo=" + ele.getTzOrderNo());
             Thread.sleep(10L);
         }
 
@@ -52,6 +56,7 @@ public class TestPoi2 {
 //        System.out.println(AesUtil.decrypt("4hhLNRQOtWmnxVF1V/nhalEx/Ms3u5ZvBZ0kdwPKG6I=", AesUtil.getKeystore()));
 //        sendGetRequest("http://activity.tongbanjie.com/test/sendCopperForInviter","param=");
 //        sendGetRequest("https://www.baidu.com/s?wd=123&rsv_spt=1&rsv_iqid=0x8b1fcced00023931&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=4&rsv_sug1=2&rsv_sug7=101&rsv_t=1911ZcpU5p2a%2B8wpC5l7oZ3P%2FsfxbTfFXBSKI1Kl0AOvUUUkFHyEqGhU4IGsa9ZwXRE6&rsv_sug2=0&inputT=722&rsv_sug4=805");
+
     }
 
     /**
@@ -126,7 +131,7 @@ public class TestPoi2 {
     }
 
     //CommonUtils.decrypt
-    public List<TzOrder> getListByExcel(InputStream in, String fileName) throws Exception {
+    public List<String> getListByExcel(InputStream in, String fileName) throws Exception {
         // 创建Excel工作薄
         Workbook work = this.getWorkbook(in, fileName);
         if (null == work) {
@@ -135,7 +140,7 @@ public class TestPoi2 {
         Sheet sheet = null;
         Row row = null;
         Cell cell = null;
-        List<TzOrder> list = new ArrayList<TzOrder>();
+        List<String> list = new ArrayList<String>();
 
         // 遍历Excel中所有的sheet
         sheet = work.getSheetAt(0);
@@ -145,12 +150,12 @@ public class TestPoi2 {
             row = sheet.getRow(j);
 
             // 遍历所有的列
-            TzOrder vo = new TzOrder();
+            /*String orderNo = null;
             for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
                 cell = row.getCell(y);
-                this.indexToValue(vo, cell, y);
-            }
-            list.add(vo);
+                orderNo = this.indexToValue(cell, y);
+            }*/
+            list.add(this.indexToValue(row.getCell(0), 0));
         }
         work.close();
 
@@ -177,17 +182,16 @@ public class TestPoi2 {
         return wb;
     }
 
-    public TzOrder indexToValue(TzOrder vo, Cell cell, int index) {
+    public String indexToValue(Cell cell, int index) {
         switch (index) {
             case 0:
-                TzOrder tzOrder = JSONObject.parseObject(cell.getStringCellValue(), TzOrder.class);
-                vo.setTzOrderNo(tzOrder.getTzOrderNo());
+                return cell.getStringCellValue();
 //                vo.setTzOrderNo(cell.getStringCellValue());
-                break;
+//            break;
             default:
                 break;
         }
-        return vo;
+        return null;
     }
 
     private static class TzOrder {
