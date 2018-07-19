@@ -141,12 +141,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j</artifactId>
-            <version>1.7.12</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
             <version>3.0.2</version>
@@ -197,14 +191,6 @@
             <version>1.4</version>
         </dependency>
 
-        <!--Redis -->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>2.0.0</version>
-            <type>jar</type>
-        </dependency>
-
         <!--MongoDB-->
         <!-- <dependency>
              <groupId>org.mongodb</groupId>
@@ -224,18 +210,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <!--       <dependency>
-                   <groupId>org.javassist</groupId>
-                   <artifactId>javassist</artifactId>
-                   <version>3.20.0-GA</version>
-               </dependency>
-
-               <dependency>
-                   <groupId>org.jboss.netty</groupId>
-                   <artifactId>netty</artifactId>
-                   <version>3.2.5.Final</version>
-               </dependency>-->
 
         <dependency>
             <groupId>net.sf.json-lib</groupId>
@@ -263,15 +237,6 @@
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-demo</artifactId>
             <version>${lucence.version}</version>
-        </dependency>
-
-
-        <!--json-lib -->
-        <dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <version>2.4</version>
-            <classifier>jdk15</classifier>
         </dependency>
 
         <!-- quartz job -->
@@ -326,7 +291,13 @@
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
-            <version>LATEST</version>
+            <version>3.4.8</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -366,7 +337,7 @@
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
-            <version>3.7.3</version>
+            <version>3.7.0</version>
         </dependency>
 
     </dependencies>

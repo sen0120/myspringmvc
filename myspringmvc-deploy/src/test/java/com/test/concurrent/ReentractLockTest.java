@@ -3,9 +3,11 @@ package com.test.concurrent;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ReentractLockTest implements Runnable {
-    ReentrantLock lock = new ReentrantLock();
+    static ReentrantLock lock = new ReentrantLock();
+    static ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
     int j = 0;
 
     public void run() {
@@ -24,6 +26,15 @@ public class ReentractLockTest implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        main2();
+    }
+
+    public static void main2() throws InterruptedException {
+        ReentrantReadWriteLock.ReadLock readLock = rwl.readLock();
+        ReentrantReadWriteLock.WriteLock writeLock = rwl.writeLock();
+    }
+
+    private static void main1() {
         ReentractLockTest rl = new ReentractLockTest();
         Thread thread1 = new Thread(rl);
         Thread thread2 = new Thread(rl);
@@ -47,6 +58,5 @@ public class ReentractLockTest implements Runnable {
         stopWatch.stop();
         System.out.println("stopWatch.getTime():" + stopWatch.getTime());
         System.out.println(rl.j);//3打印j的值
-
     }
 }
