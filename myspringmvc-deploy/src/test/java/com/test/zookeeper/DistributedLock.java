@@ -1,5 +1,14 @@
 package com.test.zookeeper;
 
+import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.KeeperException;
+import org.apache.zookeeper.WatchedEvent;
+import org.apache.zookeeper.Watcher;
+import org.apache.zookeeper.Watcher.Event.KeeperState;
+import org.apache.zookeeper.ZooDefs;
+import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.data.Stat;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,15 +17,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
-
-import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.ZooDefs;
-import org.apache.zookeeper.ZooKeeper;
-import org.apache.zookeeper.Watcher.Event.KeeperState;
-import org.apache.zookeeper.data.Stat;
 
 /**
  * @author peace
@@ -29,25 +29,23 @@ public class DistributedLock implements Lock, Watcher {
     private String myZnode;//当前锁
     private CountDownLatch latch;//计数器
     private CountDownLatch connectedSignal = new CountDownLatch(1);
-    private int sessionTimeout = 30000;
+    int sessionTimeout = 120000;//1分钟节点session过期
 
     public static void main(String[] args) {
         int i = 0;
-        while (i++ < 10) {
+        while (i++ < 3) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
 
 
-                    DistributedLock lock = new DistributedLock("192.168.1.109:2181", "lock");
+                    DistributedLock lock = new DistributedLock("192.168.92.3:2181", "lock6");
                     lock.lock();
                     //共享资源
-                    if (lock != null)
-                        lock.unlock();
+                    lock.unlock();
 
                 }
             }).start();
-            ;
         }
     }
 
@@ -86,19 +84,21 @@ public class DistributedLock implements Lock, Watcher {
             connectedSignal.countDown();
             return;
         }
-        //其他线程放弃锁的标志
-        if (this.latch != null) {
-            this.latch.countDown();
+        if (event.getType() == Event.EventType.NodeDeleted) {
+            //其他线程放弃锁的标志
+            if (this.latch != null) {
+                this.latch.countDown();
+            }
         }
     }
 
     public void lock() {
         try {
             if (this.tryLock()) {
-                System.out.println("Thread " + Thread.currentThread().getId() + " " + myZnode + " get lock true");
+                System.out.println("Thread " + myZnode + " get lock true");
                 return;
             } else {
-                waitForLock(waitNode, sessionTimeout);//等待锁
+                waitForLock(waitNode);//等待锁
             }
         } catch (KeeperException e) {
             throw new LockException(e);
@@ -130,6 +130,11 @@ public class DistributedLock implements Lock, Watcher {
             if (myZnode.equals(root + "/" + lockObjNodes.get(0))) {
                 //如果是最小的节点,则表示取得锁
                 System.out.println(myZnode + "==" + lockObjNodes.get(0));
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 return true;
             }
             //如果不是最小的节点，找到比自己小1的节点
@@ -148,20 +153,32 @@ public class DistributedLock implements Lock, Watcher {
             if (this.tryLock()) {
                 return true;
             }
-            return waitForLock(waitNode, time);
+            return waitForLock(waitNode);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    private boolean waitForLock(String lower, long waitTime) throws InterruptedException, KeeperException {
-        Stat stat = zk.exists(root + "/" + lower, true);//同时注册监听。
+    private boolean waitForLock(String lower) throws InterruptedException, KeeperException {
+        Stat stat = zk.exists(root + "/" + lower, new Watcher() {
+            @Override
+            public void process(WatchedEvent event) {
+                if (event.getType() == Event.EventType.NodeDeleted) {
+                    //其他线程放弃锁的标志
+                    if (latch != null) {
+                        latch.countDown();
+                    }
+                }
+            }
+        });//同时注册监听。
         //判断比自己小一个数的节点是否存在,如果不存在则无需等待锁,同时注册监听
         if (stat != null) {
-            System.out.println("Thread " + Thread.currentThread().getId() + " waiting for " + root + "/" + lower);
+            System.out.println("Thread " + myZnode + " waiting for " + root + "/" + lower);
             this.latch = new CountDownLatch(1);
-            this.latch.await(waitTime, TimeUnit.MILLISECONDS);//等待，这里应该一直等待其他线程释放锁
+//            this.latch.await(waitTime, TimeUnit.MILLISECONDS);//等待，这里应该一直等待其他线程释放锁
+            this.latch.await();//等待，这里应该一直等待其他线程释放锁
+            System.out.println("Thread " + myZnode + " get lock true");
             this.latch = null;
         }
         return true;
