@@ -13,36 +13,44 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @author peace
+ * 这个锁对象不可重入,只能用一次;
  */
 public class DistributedLock implements Lock, Watcher {
     private ZooKeeper zk;
+    private AtomicBoolean isUsed = new AtomicBoolean();
     private String root = "/locks";//根
     private String lockName;//竞争资源的标志
     private String waitNode;//等待前一个锁
     private String myZnode;//当前锁
-    private CyclicBarrier cyclicBarrier = new CyclicBarrier(2);//计数器
+    private CountDownLatch latch = new CountDownLatch(1);//计数器
     private CountDownLatch connectedSignal = new CountDownLatch(1);
     int sessionTimeout = 120000;//1分钟节点session过期
+    private ReentrantReadWriteLock.WriteLock writeLock = new ReentrantReadWriteLock().writeLock();
 
     public static void main(String[] args) {
         int i = 0;
-        while (i++ < 3) {
+        while (i++ < 2) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
 
 
-                    DistributedLock lock = new DistributedLock("192.168.92.3:2181", "lock6");
+                    DistributedLock lock = new DistributedLock("192.168.92.3:2181", "lock7");
                     lock.lock();
+                    try {
+                        TimeUnit.SECONDS.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     //共享资源
                     lock.unlock();
 
@@ -87,19 +95,20 @@ public class DistributedLock implements Lock, Watcher {
         }
         if (event.getType() == Event.EventType.NodeDeleted) {
             //其他线程放弃锁的标志
-            if (this.cyclicBarrier != null) {
-                try {
-                    this.cyclicBarrier.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (BrokenBarrierException e) {
-                    e.printStackTrace();
-                }
+            if (this.latch != null) {
+                this.latch.countDown();
             }
         }
     }
 
     public void lock() {
+        writeLock.lock();
+        if (isUsed.get()) {
+            writeLock.unlock();
+            throw new IllegalArgumentException("本锁为一次性锁,不可重复使用");
+        } else {
+            isUsed.set(true);
+        }
         try {
             if (this.tryLock()) {
                 System.out.println(myZnode + " get lock true");
@@ -170,14 +179,10 @@ public class DistributedLock implements Lock, Watcher {
         //判断比自己小一个数的节点是否存在,如果不存在则无需等待锁,同时注册监听
         if (stat != null) {
             System.out.println(myZnode + " waiting for " + root + "/" + lower);
-//            this.cyclicBarrier.await(waitTime, TimeUnit.MILLISECONDS);//等待，这里应该一直等待其他线程释放锁
-            try {
-                this.cyclicBarrier.await();//等待，这里应该一直等待其他线程释放锁
-            } catch (BrokenBarrierException e) {
-                e.printStackTrace();
-            }
+//            this.latch.await(waitTime, TimeUnit.MILLISECONDS);//等待，这里应该一直等待其他线程释放锁
+            this.latch.await();//等待，这里应该一直等待其他线程释放锁
             System.out.println(myZnode + " get lock true");
-            this.cyclicBarrier = null;
+            this.latch = null;
         }
         return true;
     }
@@ -192,7 +197,12 @@ public class DistributedLock implements Lock, Watcher {
             e.printStackTrace();
         } catch (KeeperException e) {
             e.printStackTrace();
+        } finally {
+            if (writeLock.isHeldByCurrentThread()) {
+                writeLock.unlock();
+            }
         }
+
     }
 
     public void lockInterruptibly() throws InterruptedException {

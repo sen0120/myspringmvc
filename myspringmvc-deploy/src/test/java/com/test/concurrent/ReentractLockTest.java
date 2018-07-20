@@ -8,6 +8,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class ReentractLockTest implements Runnable {
     static ReentrantLock lock = new ReentrantLock();
     static ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+    static ReentrantReadWriteLock.WriteLock writeLock = rwl.writeLock();
     int j = 0;
 
     public void run() {
@@ -26,7 +27,36 @@ public class ReentractLockTest implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        main2();
+//        main2();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                writeLock();
+                writeLock();
+//                writeUnlock();
+            }
+        }).start();
+
+        Thread.sleep(1000L);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                writeLock();
+//                writeUnlock();
+            }
+        }).start();
+    }
+
+    public static void writeLock() {
+        writeLock.lock();
+        System.out.println("wirtelock lock() success");
+    }
+
+    public static void writeUnlock() {
+        if (writeLock.isHeldByCurrentThread()) {
+            writeLock.unlock();
+        }
     }
 
     public static void main2() throws InterruptedException {
