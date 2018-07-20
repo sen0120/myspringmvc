@@ -163,14 +163,6 @@ public class DistributedLock implements Lock, Watcher {
     }
 
     public boolean tryLock(long time, TimeUnit unit) {
-        try {
-            if (this.tryLock()) {
-                return true;
-            }
-            return waitForLock(waitNode);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return false;
     }
 
@@ -206,7 +198,7 @@ public class DistributedLock implements Lock, Watcher {
     }
 
     public void lockInterruptibly() throws InterruptedException {
-        this.lock();
+        return;
     }
 
     public Condition newCondition() {
