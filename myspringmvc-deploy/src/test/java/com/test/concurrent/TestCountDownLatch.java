@@ -3,37 +3,37 @@ package com.test.concurrent;
 import java.util.concurrent.CountDownLatch;
 
 public class TestCountDownLatch {
-    static CountDownLatch latch = null;
+    static CountDownLatch latch = new CountDownLatch(1);
 
-    public static void main(String[] args) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    proccess();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    proccess();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }).start();
-    }
-
-    public static void proccess() throws InterruptedException {
-        latch = new CountDownLatch(1);
-        System.out.println(Thread.currentThread().getName() + "start await");
+    public static void main(String[] args) throws InterruptedException {
+        latch.countDown();
+        System.out.println(1);
         latch.await();
-        System.out.println(Thread.currentThread().getName() + "finish await");
+        System.out.println(2);
+        latch.await();
+        System.out.println(3);
+        /*new Thread(new Runnable() {
+            @Override
+            public void run() {
+                latch.countDown();
+
+
+            }
+        }).start();
+
+        Thread.sleep(3000L);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    latch.await();
+                    System.out.println("finish");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();*/
     }
+
 }

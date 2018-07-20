@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -27,7 +29,7 @@ public class DistributedLock implements Lock, Watcher {
     private String lockName;//竞争资源的标志
     private String waitNode;//等待前一个锁
     private String myZnode;//当前锁
-    private CountDownLatch latch;//计数器
+    private CyclicBarrier cyclicBarrier = new CyclicBarrier(2);//计数器
     private CountDownLatch connectedSignal = new CountDownLatch(1);
     int sessionTimeout = 120000;//1分钟节点session过期
 
@@ -82,12 +84,17 @@ public class DistributedLock implements Lock, Watcher {
         //建立连接用
         if (event.getState() == KeeperState.SyncConnected) {
             connectedSignal.countDown();
-            return;
         }
         if (event.getType() == Event.EventType.NodeDeleted) {
             //其他线程放弃锁的标志
-            if (this.latch != null) {
-                this.latch.countDown();
+            if (this.cyclicBarrier != null) {
+                try {
+                    this.cyclicBarrier.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (BrokenBarrierException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -95,7 +102,7 @@ public class DistributedLock implements Lock, Watcher {
     public void lock() {
         try {
             if (this.tryLock()) {
-                System.out.println("Thread " + myZnode + " get lock true");
+                System.out.println(myZnode + " get lock true");
                 return;
             } else {
                 waitForLock(waitNode);//等待锁
@@ -127,9 +134,7 @@ public class DistributedLock implements Lock, Watcher {
             }
             Collections.sort(lockObjNodes);
 
-            if (myZnode.equals(root + "/" + lockObjNodes.get(0))) {
-                //如果是最小的节点,则表示取得锁
-                System.out.println(myZnode + "==" + lockObjNodes.get(0));
+            if (myZnode.equals(root + "/" + lockObjNodes.get(0))) {//如果是最小的节点,则表示取得锁
                 try {
                     TimeUnit.SECONDS.sleep(3);
                 } catch (InterruptedException e) {
@@ -161,25 +166,18 @@ public class DistributedLock implements Lock, Watcher {
     }
 
     private boolean waitForLock(String lower) throws InterruptedException, KeeperException {
-        Stat stat = zk.exists(root + "/" + lower, new Watcher() {
-            @Override
-            public void process(WatchedEvent event) {
-                if (event.getType() == Event.EventType.NodeDeleted) {
-                    //其他线程放弃锁的标志
-                    if (latch != null) {
-                        latch.countDown();
-                    }
-                }
-            }
-        });//同时注册监听。
+        Stat stat = zk.exists(root + "/" + lower, this);//同时注册监听。
         //判断比自己小一个数的节点是否存在,如果不存在则无需等待锁,同时注册监听
         if (stat != null) {
-            System.out.println("Thread " + myZnode + " waiting for " + root + "/" + lower);
-            this.latch = new CountDownLatch(1);
-//            this.latch.await(waitTime, TimeUnit.MILLISECONDS);//等待，这里应该一直等待其他线程释放锁
-            this.latch.await();//等待，这里应该一直等待其他线程释放锁
-            System.out.println("Thread " + myZnode + " get lock true");
-            this.latch = null;
+            System.out.println(myZnode + " waiting for " + root + "/" + lower);
+//            this.cyclicBarrier.await(waitTime, TimeUnit.MILLISECONDS);//等待，这里应该一直等待其他线程释放锁
+            try {
+                this.cyclicBarrier.await();//等待，这里应该一直等待其他线程释放锁
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+            System.out.println(myZnode + " get lock true");
+            this.cyclicBarrier = null;
         }
         return true;
     }
