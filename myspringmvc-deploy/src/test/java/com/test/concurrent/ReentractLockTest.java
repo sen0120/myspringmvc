@@ -32,8 +32,8 @@ public class ReentractLockTest implements Runnable {
             @Override
             public void run() {
                 writeLock();
-                writeLock();
-//                writeUnlock();
+//                writeLock();
+                writeUnlock();
             }
         }).start();
 
