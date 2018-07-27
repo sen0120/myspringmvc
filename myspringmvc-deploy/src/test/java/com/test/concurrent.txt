@@ -18,7 +18,7 @@ sleep()方法(静态方法,可睡眠当前线程)
 isAlive()方法,返回当前线程是否正在执行,没有开始和已经死亡的线程返回false,正在执行的线程返回true
 setDaemon()方法,将线程设置为守护线程,如果所有用户线程都停止了,那么守护线程也会都自动终止;如果有用户线程活着,程序就不会终止;
 
-park和unpark类似于wait和notify,但好处是可以先unpark后park;而如果先notify后wait那么线程会用于都处于wait状态,这让编程变得复杂,如果先执行notify,在执行wait,线程会一直等待.
+park和unpark类似于wait和notify,但好处是可以先unpark后park;而如果先notify后wait那么线程会用于都处于wait状态,这让编程变得复杂,如果先执行notify,在执行wait,线程会一直等待.如果有多个线程wait需要执行多次notify,或者执行一次notifyAll通知所有等待线程竞争锁.
 
 成员变量在堆中 局部变量在栈中
 实参 实际参数,必须有明确的值;行参 行为参数,用来接受接入参数的,及方法名中的参数.
