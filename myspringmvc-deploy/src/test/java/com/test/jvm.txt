@@ -30,7 +30,7 @@ java堆，存放实例对象所有线程共享。
 (新生代比例)-XX:suvivorRatio，即eden/from=eden/to，eden=Xmn大小÷（eden/(eden+from+to)）
 （新生代年老代比例）-XX:NewRatio=年老代/新生代
 -XX:+HeapDumpOnOutOfMemoryError -XX:HeadDumpPath导出堆设置路径
--XX：MaxTenuringThreshold，新生代进入年老代需要经历多少次gc，默认15次；
+-XX：MaxTenuringThreshold，新生代进入年老代需要经历多少次gc，默认15次；大对象直接进年老代
 
 栈：-Xss 指定线程的最大栈空间，决定了函数可调用的最大深度；
 方法区：-XX:MaxPermSize
