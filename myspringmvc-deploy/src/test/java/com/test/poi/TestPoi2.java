@@ -40,14 +40,14 @@ public class TestPoi2 {
 
 
         List<String> listByExcel = testPoi.getListByExcel(new FileInputStream(file), "*.xlsx");
-
+        int i = 0;
         for (String ele : listByExcel) {
-            sendGetRequest("https://mapi.tongbanjie.com/libra/test/sendCopperForInviter?orderNo=" + ele);
-//            System.out.println(ele);
-//            System.out.println(tzOrder.getTzOrderNo());
-//            sendGetRequest("https://activity.tongbanjie.com/test/fan18/trade/succ/ordermq?tzOrderNo=" + ele.getTzOrderNo());
+            i++;
+            System.out.println("https://activity.tongbanjie.com/test/guaguakaTongziTradeSuccMqCallBack/orderNo?orderNo=" + ele);
+            sendGetRequest("https://activity.tongbanjie.com/test/guaguakaTongziTradeSuccMqCallBack/orderNo?orderNo=" + ele);
             Thread.sleep(10L);
         }
+        System.out.println(i);
 
 
 //        System.out.println(listByExcel);
