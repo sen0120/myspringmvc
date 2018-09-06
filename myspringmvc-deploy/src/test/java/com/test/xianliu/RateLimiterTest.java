@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
  * Created by wuwf on 17/7/11.
  * 有很多个任务，但希望每秒不超过X个，可用此类
  */
-public class Demo1 {
+public class RateLimiterTest {
 
     public static void main(String[] args) {
         //0.5代表一秒最多多少个  
