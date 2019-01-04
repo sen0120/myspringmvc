@@ -26,7 +26,7 @@ public class TestPoi2 {
     private final static String excel2007U = ".xlsx"; // 2007+ 版本的excel
 
     public static void main(String[] args) throws Exception {
-//        sendGetRequest("https://activity.tongbanjie.com//test/worldcup18/trade/succ/ordermq?tzOrderNo=18062913134578700010120350413641");
+//        sendGetRequest("https://activity.xxx.com//test/worldcup18/trade/succ/ordermq?tzOrderNo=18062913134578700010120350413641");
         a1();
     }
 
@@ -43,8 +43,8 @@ public class TestPoi2 {
         int i = 0;
         for (String ele : listByExcel) {
             i++;
-            System.out.println("https://activity.tongbanjie.com/test/guaguakaTongziTradeSuccMqCallBack/orderNo?orderNo=" + ele);
-            sendGetRequest("https://activity.tongbanjie.com/test/guaguakaTongziTradeSuccMqCallBack/orderNo?orderNo=" + ele);
+            System.out.println("https://activity.xxx.com/test/guaguakaTongziTradeSuccMqCallBack/orderNo?orderNo=" + ele);
+            sendGetRequest("https://activity.xxx.com/test/guaguakaTongziTradeSuccMqCallBack/orderNo?orderNo=" + ele);
             Thread.sleep(10L);
         }
         System.out.println(i);
