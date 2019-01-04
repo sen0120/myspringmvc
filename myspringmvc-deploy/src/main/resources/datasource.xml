@@ -40,7 +40,7 @@
     </bean>
     <!--单个注入mapper,好处是对低版本友好-->
     <!--<bean class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.tongbanjie.ares.dao.mapper.StudentMapper" />
+		<property name="mapperInterface" value="com.xxx.ares.dao.mapper.StudentMapper" />
 		<property name="sqlSessionFactory" ref="userSqlSessionFactory" />
 	</bean>-->
 
