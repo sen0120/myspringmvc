@@ -54,7 +54,7 @@ public class TestPoi2 {
 
 //        System.out.println(AesUtil.decrypt("FXIu93u7lvGx9ml2sxtYOkUbLa6XTysP0RBuvF3Em2I=", AesUtil.getKeystore()));
 //        System.out.println(AesUtil.decrypt("4hhLNRQOtWmnxVF1V/nhalEx/Ms3u5ZvBZ0kdwPKG6I=", AesUtil.getKeystore()));
-//        sendGetRequest("http://activity.tongbanjie.com/test/sendCopperForInviter","param=");
+//        sendGetRequest("http://activity.xxx.com/test/sendCopperForInviter","param=");
 //        sendGetRequest("https://www.baidu.com/s?wd=123&rsv_spt=1&rsv_iqid=0x8b1fcced00023931&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=4&rsv_sug1=2&rsv_sug7=101&rsv_t=1911ZcpU5p2a%2B8wpC5l7oZ3P%2FsfxbTfFXBSKI1Kl0AOvUUUkFHyEqGhU4IGsa9ZwXRE6&rsv_sug2=0&inputT=722&rsv_sug4=805");
 
     }
